@@ -1,11 +1,11 @@
 Name:           pbzip2
 Version:        1.1.12
-Release:        10
+Release:        11
 Summary:        Parallel implementation of the bzip2 block-sorting file compressor
 License:        BSD
 URL:            http://www.compression.ca/pbzip2/
 
-Source0:        http://www.compression.ca/pbzip2/pbzip2-%{version}.tar.gz
+Source0:        http://launchpad.net/pbzip2/1.1/1.1.12/+download/pbzip2-%{version}.tar.gz
 Patch0:         pbzip2-1.1.12-buildflags.patch
 
 BuildRequires:  gcc-c++ bzip2-devel
@@ -46,5 +46,8 @@ popd
 %{_mandir}/man1/*
 
 %changelog
+* Thu Nov 10 2022 liyanan <liyanan32@h-partners.com>  - 1.1.12-11
+- Change source
+
 * Fri Jan 10 2020 openEuler Buildteam <buildteam@openeuler.org> - 1.1.12-10
 - Package init
