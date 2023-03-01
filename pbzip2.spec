@@ -1,12 +1,13 @@
+%global debug_package %{nil}
 Name:           pbzip2
-Version:        1.1.12
-Release:        10
+Version:        1.1.13
+Release:        1
 Summary:        Parallel implementation of the bzip2 block-sorting file compressor
 License:        BSD
 URL:            http://www.compression.ca/pbzip2/
 
-Source0:        http://www.compression.ca/pbzip2/pbzip2-%{version}.tar.gz
-Patch0:         pbzip2-1.1.12-buildflags.patch
+Source0:        https://launchpad.net/pbzip2/1.1/1.1.13/+download/pbzip2-1.1.13.tar.gz
+Patch0:       001-Fix-Invalid-Suffix_pbzip2.patch
 
 BuildRequires:  gcc-c++ bzip2-devel
 
@@ -19,11 +20,11 @@ The output of this version should be fully compatible with bzip2 v1.0.2 or newer
 
 %prep
 %autosetup -n pbzip2-%{version} -p1
-f=AUTHORS; iconv -f iso-8859-1 -t utf-8 $f > $f.utf8 && mv $f.utf8 $f
+f=AUTHORS; iconv -f iso-8859-1 -t utf-8 $f > $f.utf8 && mv $f.utf8 $f && alias rpmbuild='rpmbuild --nodebuginfo' 
 
 %build
 %set_build_flags
-%make_build
+%make_build CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="%{__global_ldflags}"
 
 
 %install
@@ -46,5 +47,8 @@ popd
 %{_mandir}/man1/*
 
 %changelog
+* Fri Feb 03 2023 wenchaofan <349464272@qq.com> - 1.1.13-1
+- Update to 1.1.13
+
 * Fri Jan 10 2020 openEuler Buildteam <buildteam@openeuler.org> - 1.1.12-10
 - Package init
